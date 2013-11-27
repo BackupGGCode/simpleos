@@ -61,10 +61,6 @@
   <ItemGroup>
     <None Include="boot.s" />
     <None Include="interrupt\interrupt.s" />
-    <None Include="link.ld" />
-    <CustomBuild Include="Makefile">
-      <FileType>Document</FileType>
-    </CustomBuild>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E9B2B8BA-92E4-426C-B5D8-8995CC39E17F}</ProjectGuid>
