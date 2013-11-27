@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cpu\cpuid.c" />
+    <ClCompile Include="cpu\fpu.c" />
+    <ClCompile Include="drivers\apci.c" />
+    <ClCompile Include="drivers\pci\driver.c" />
+    <ClCompile Include="drivers\pci\pci.c" />
+    <ClCompile Include="drivers\pci\registry.c" />
+    <ClCompile Include="drivers\pit.c" />
+    <ClCompile Include="drivers\rtc.c" />
+    <ClCompile Include="drivers\screen\textmode.c" />
+    <ClCompile Include="drivers\serial.c" />
+    <ClCompile Include="drivers\smbios.c" />
+    <ClCompile Include="interrupt\gdt.c" />
+    <ClCompile Include="interrupt\idt.c" />
+    <ClCompile Include="interrupt\isr.c" />
+    <ClCompile Include="lib\x86.c" />
+    <ClCompile Include="lib\rand.c" />
+    <ClCompile Include="lib\string.c" />
+    <ClCompile Include="lib\vsprintf.c" />
+    <ClCompile Include="main.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\cpu\cpuid.h" />
+    <ClInclude Include="include\cpu\fpu.h" />
+    <ClInclude Include="include\drivers\acpi.h" />
+    <ClInclude Include="include\drivers\pci\driver.h" />
+    <ClInclude Include="include\drivers\pci\pci.h" />
+    <ClInclude Include="include\drivers\pci\registry.h" />
+    <ClInclude Include="include\drivers\pit.h" />
+    <ClInclude Include="include\drivers\rtc.h" />
+    <ClInclude Include="include\drivers\screen\textmode.h" />
+    <ClInclude Include="include\drivers\serial.h" />
+    <ClInclude Include="include\drivers\smbios.h" />
+    <ClInclude Include="include\interrupt\gdt.h" />
+    <ClInclude Include="include\interrupt\idt.h" />
+    <ClInclude Include="include\interrupt\isr.h" />
+    <ClInclude Include="include\lib\stddef.h" />
+    <ClInclude Include="include\lib\stdtypes.h" />
+    <ClInclude Include="include\lib\multiboot.h" />
+    <ClInclude Include="include\lib\rand.h" />
+    <ClInclude Include="include\lib\stdarg.h" />
+    <ClInclude Include="include\lib\stdbool.h" />
+    <ClInclude Include="include\lib\string.h" />
+    <ClInclude Include="include\lib\time.h" />
+    <ClInclude Include="include\lib\vsprintf.h" />
+    <ClInclude Include="include\lib\x86.h" />
+    <ClInclude Include="include\main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="boot.s" />
+    <None Include="interrupt\interrupt.s" />
+    <None Include="link.ld" />
+    <CustomBuild Include="Makefile">
+      <FileType>Document</FileType>
+    </CustomBuild>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E9B2B8BA-92E4-426C-B5D8-8995CC39E17F}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>..\tools\make</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>..\tools\make clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>..\tools\make clean all</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;_DEBUG;VERSION_MAJOR;VERSION_MINOR;VERSION_BUILD;VERSION_DATE</NMakePreprocessorDefinitions>
+    <ExecutablePath />
+    <IncludePath>include</IncludePath>
+    <ReferencePath />
+    <LibraryPath />
+    <LibraryWPath />
+    <SourcePath />
+    <ExcludePath />
+    <OutDir>$(TMP)\</OutDir>
+    <IntDir>$(TMP)\</IntDir>
+    <BaseIntermediateOutputPath>..\build</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <NMakeBuildCommandLine>..\tools\make</NMakeBuildCommandLine>
+    <NMakeCleanCommandLine>..\tools\make clean</NMakeCleanCommandLine>
+    <NMakeReBuildCommandLine>..\tools\make clean all</NMakeReBuildCommandLine>
+    <NMakePreprocessorDefinitions>WIN32;NDEBUG;VERSION_MAJOR;VERSION_MINOR;VERSION_BUILD;VERSION_DATE</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <BuildLog>
+      <Path>$(TMP)\$(MSBuildProjectName).log</Path>
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <PropertyGroup>
+    <ShowAllFiles>true</ShowAllFiles>
+  </PropertyGroup>
+</Project>

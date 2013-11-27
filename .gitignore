@@ -1,6 +1,7 @@
 build/
 tools/
 backup/
+.build
 cd.iso
 
 # Ignore Visual Studio temporary files

@@ -9,8 +9,8 @@ OUTPUT = both
 FLOPPYDIR=/mnt/floppy
 
 VERSION_MAJOR = 0
-VERSION_MINOR = 1
-VERSION_BUILD := 1
+VERSION_MINOR = 2
+VERSION_BUILD := $(shell cat .build 2>/dev/null || (echo 1 > .build && echo 1))
 VERSION_DATE := $(shell date +'%Y-%m-%d')
 
 AS = nasm
@@ -22,7 +22,7 @@ ASFLAGS = -f elf
 CFLAGS = -std=c99 -m32 -nodefaultlibs -nostdlib -nostdinc -fno-builtin -ffreestanding -I src/include \
 			-Wall -Wextra -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Winline -Wno-long-long -Wstrict-prototypes \
 			-Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable \
-			-DVERSION_MAJOR=$(VERSION_MAJOR) -DVERSION_MINOR=$(VERSION_MINOR) -DVERSION_BUILD=$(VERSION_BUILD) -DVERSION_DATE=\"$(VERSION_DATE)\"
+			-DVERSION_MAJOR=$(VERSION_MAJOR) -DVERSION_MINOR=$(VERSION_MINOR) -DVERSION_BUILD=$(VERSION_BUILD) -DVERSION_DATE="$(VERSION_DATE)"
 # -Wpedantic -Wconversion
 LDFLAGS = -m elf_i386 -T link.ld
 
@@ -46,6 +46,7 @@ $(OBJDIR):
 	@$(shell for dir in $(DIRS); do mkdir -p $(OBJDIR)/$$dir; done)
 
 $(OBJDIR)/$(APP): $(OBJS)
+	@echo $$(($$(cat .build) + 1)) > .build
 	@echo Linking $(APP)
 	@$(LD) $(LDFLAGS) -o $(OBJDIR)/$(APP) $(OBJS)
 
