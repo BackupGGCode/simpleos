@@ -1,3 +1,8 @@
+build/
+tools/
+backup/
+cd.iso
+
 # Ignore Visual Studio temporary files
 *.suo
 *.user
