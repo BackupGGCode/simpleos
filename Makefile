@@ -22,7 +22,7 @@ ASFLAGS = -f elf
 CFLAGS = -std=c99 -m32 -nodefaultlibs -nostdlib -nostdinc -fno-builtin -ffreestanding -I src/include \
 			-Wall -Wextra -Wshadow -Wpointer-arith -Wcast-align -Wwrite-strings -Wmissing-prototypes -Wmissing-declarations -Wredundant-decls -Wnested-externs -Winline -Wno-long-long -Wstrict-prototypes \
 			-Wno-unused-function -Wno-unused-parameter -Wno-unused-variable -Wno-unused-but-set-variable \
-			-DVERSION_MAJOR=$(VERSION_MAJOR) -DVERSION_MINOR=$(VERSION_MINOR) -DVERSION_BUILD=$(VERSION_BUILD) -DVERSION_DATE="$(VERSION_DATE)"
+			-DVERSION_MAJOR=$(VERSION_MAJOR) -DVERSION_MINOR=$(VERSION_MINOR) -DVERSION_BUILD=$(VERSION_BUILD) -DVERSION_DATE=\"$(VERSION_DATE)\"
 # -Wpedantic -Wconversion
 LDFLAGS = -m elf_i386 -T link.ld
 
@@ -99,7 +99,7 @@ todo:
 
 dist: clean all build-both
 	@echo Building simpleos.tgz
-	@tar czf simpleos.tgz --exclude='*.suo' --exclude='*.vcxproj.user' build/ src/ $(AUXFILES)
+	@tar czf simpleos.tgz --exclude='*.suo' --exclude='*.user' build/ src/ $(AUXFILES)
 
 backup: dist
 	@echo Saving to backup/simpleos-$(shell date +%Y-%m-%d).tgz
