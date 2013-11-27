@@ -1,0 +1,9 @@
+boot: floppy
+floppya: 1_44=../floppy.img, status=inserted
+log: bochs.log
+cpu: model=corei5_arrandale_m520
+megs: 128
+mouse: type=ps2, enabled=0, toggle=ctrl+alt
+pci: enabled=1, chipset=i440fx, slot1=pcivga
+clock: sync=none, time0=local
+com1: enabled=1, mode=file, dev=serial.log
