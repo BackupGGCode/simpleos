@@ -6,7 +6,7 @@ AUXFILES = Makefile link.ld floppy.img cd.iso
 OUTPUT = both
 
 # Location to mount floppy.img
-FLOPPYDIR=/mnt/floppy
+FLOPPYDIR = /mnt/floppy
 
 VERSION_MAJOR = 0
 VERSION_MINOR = 2
@@ -14,8 +14,8 @@ VERSION_BUILD := $(shell cat .build 2>/dev/null || (echo 1 > .build && echo 1))
 VERSION_DATE := $(shell date +'%Y-%m-%d')
 
 AS = nasm
-#CC = gcc
-CC = gcc-4.8.2 # Cross Compiler
+#CC = gcc # Stock compiler may work, but not recommended
+CC = gcc-4.8.2 # Cross compiler
 LD = ld
 
 ASFLAGS = -f elf
@@ -26,8 +26,8 @@ CFLAGS = -std=c99 -m32 -nodefaultlibs -nostdlib -nostdinc -fno-builtin -ffreesta
 # -Wpedantic -Wconversion
 LDFLAGS = -m elf_i386 -T link.ld
 
-AFILES := $(shell find src/ -name *.s | sed 's/src\///')
-CFILES := $(shell find src/ -name *.c | sed 's/src\///')
+AFILES := $(shell find src/ -name '*.s' | sed 's/src\///')
+CFILES := $(shell find src/ -name '*.c' | sed 's/src\///')
 FILES = $(AFILES) $(CFILES)
 ADIRS := $(shell find src/ -name '*.s' -exec dirname {} \; | sed 's/src//' | uniq)
 CDIRS := $(shell find src/ -name '*.c' -exec dirname {} \; | sed 's/src//' | uniq)
@@ -40,7 +40,7 @@ OBJS = $(AOBJS) $(COBJS)
 .PHONY: all clean clean-floppy build-floppy build-iso build-both todo dist backup cloc $(OBJDIR)
 
 all: $(OBJDIR) $(OBJDIR)/$(APP) build-$(OUTPUT)
-	@echo Done
+	@echo "Done"
 
 $(OBJDIR):
 	@$(shell for dir in $(DIRS); do mkdir -p $(OBJDIR)/$$dir; done)

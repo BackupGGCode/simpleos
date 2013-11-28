@@ -3,7 +3,7 @@
 #include <lib/string.h>
 #include <drivers/screen/textmode.h>
 
-static inline void cpuid(uint32_t reg, uint32_t *eax, uint32_t *ebx, uint32_t *ecx, uint32_t *edx)
+void cpuid(uint32_t reg, uint32_t *eax, uint32_t *ebx, uint32_t *ecx, uint32_t *edx)
 {
 	__asm __volatile__("cpuid" : "=a"(*eax), "=b"(*ebx), "=c"(*ecx), "=d"(*edx) : "a"(reg));
 }
@@ -59,24 +59,25 @@ void cpu_detect(void)
 	if (largestStandardFunc >= 0x01) {
 		cpuid(0x01, &eax, &ebx, &ecx, &edx);
 
-		uint32_t stepping = eax & 0xF;
-		uint32_t model = (eax >> 4) & 0xF;
-		uint32_t family = (eax >> 8) & 0xF;
-		uint32_t exmodel = (eax >> 16) & 0xF;
-		uint32_t exfamily = (eax >> 20) & 0xFF;
+		//struct cpu_signature_s *cpu = (struct cpu_signature_s *)&eax;
 
-		uint32_t fullModel = model;
-		uint32_t fullFamily = family;
+		uint32_t stepping = eax & 0x0F;
+		uint32_t model = (eax >> 4) & 0x0F;
+		uint32_t family = (eax >> 8) & 0x0F;
 
-		if (family == 0x06 || family == 0x0F) {
-			fullModel = model + (exmodel << 4);
+		if (strcmp(vendor, "GenuineIntel") == 0) {
+			uint32_t exmodel = (eax >> 16) & 0x0F;
+			uint32_t exfamily = (eax >> 20) & 0xFF;
+
+			if (family == 0x0F) {
+				family += exfamily;
+				model += (exmodel << 4);
+			} else if (family == 0x06) {
+				model += (exmodel << 4);
+			}
 		}
 
-		if (family == 0x0F) {
-			fullFamily = family + exfamily;
-		}
-
-		printf("Family: %X, Model: %X, Stepping: %X\n", fullFamily, fullModel, stepping);
+		printf("Family: %X, Model: %X, Stepping: %X\n", family, model, stepping);
 
 		printf("Features:");
 

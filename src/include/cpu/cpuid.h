@@ -1,6 +1,8 @@
 #ifndef CPU_CPUID_H
 #define CPU_CPUID_H
 
+#include <lib/stdtypes.h>
+
 // Function 0x01
 #define ECX_SSE3 (1 << 0) // Streaming SIMD Extensions 3
 #define ECX_PCLMULQDQ (1 << 1) // PCLMULQDQ Instruction
@@ -70,5 +72,6 @@
 #define EDX_64_BIT (1 << 29) // 64-bit Architecture
 
 void cpu_detect(void);
+void cpuid(uint32_t reg, uint32_t *eax, uint32_t *ebx, uint32_t *ecx, uint32_t *edx);
 
 #endif
