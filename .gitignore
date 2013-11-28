@@ -1,6 +1,8 @@
 build/
-tools/
 backup/
+tools/*
+!tools/floppy.sh
+!tools/bochsrc.txt
 .build
 cd.iso
 
