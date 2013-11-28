@@ -40,7 +40,7 @@ OBJS = $(AOBJS) $(COBJS)
 .PHONY: all clean clean-floppy build-floppy build-iso build-both todo dist backup cloc $(OBJDIR)
 
 all: $(OBJDIR) $(OBJDIR)/$(APP) build-$(OUTPUT)
-	@echo "Done"
+	@echo Done
 
 $(OBJDIR):
 	@$(shell for dir in $(DIRS); do mkdir -p $(OBJDIR)/$$dir; done)
